@@ -7,14 +7,14 @@ using System.Collections.Generic;
 public class GameScene : Scene
 {
     public Client m_Client;
-    public Player m_LocalPlayer;
+    public PlayerLocal m_LocalPlayer;
 
     public override void LoadContent()
     {
         m_GameObjects = new List<GameObject>();
 
         // Add Player
-        m_LocalPlayer = new Player("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
+        m_LocalPlayer = new PlayerLocal("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
         m_GameObjects.Add(m_LocalPlayer);
 
         // Create an instance of the client

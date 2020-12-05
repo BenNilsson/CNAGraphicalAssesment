@@ -1,24 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 
 public class Player : GameObject
 {
-    private float m_fMovementSpeed = 200f;
+    protected float m_fMovementSpeed = 200f;
 
-    private int m_iSingleSpriteWidth = 64;
-    private int m_iSingleSpriteHeight = 64;
+    protected int m_iSingleSpriteWidth = 64;
+    protected int m_iSingleSpriteHeight = 64;
 
-    private int m_iFrame = 1;
-    private int m_iFrameCount = 4;
-    private float m_fCurFrameTime = 0;
+    protected bool m_bMoving = false;
+    protected bool m_bMovingLeft = false;
 
-    private bool m_bMoving = false;
-    private bool m_bMovingLeft = false;
+    protected int m_iFrame = 1;
+    protected int m_iFrameCount = 4;
+    protected float m_fCurFrameTime = 0;
 
-    public Player(string path, Vector2 startPosition) : base(path, startPosition)
+    public Player(string imagePath, Vector2 startPos) : base(imagePath, startPos)
     {
         Transform.m_Scale = new Vector2(2, 2);
         m_SourceRect = new Rectangle(0, 0, m_iSingleSpriteWidth, m_iSingleSpriteHeight);
@@ -40,20 +39,7 @@ public class Player : GameObject
 
     public override void Update(GameTime gameTime)
     {
-        var keyboardState = Keyboard.GetState();
         m_bMoving = false;
-
-        if (keyboardState.IsKeyDown(Keys.Left))
-        {
-            MoveLeft(gameTime);
-        }
-
-        if (keyboardState.IsKeyDown(Keys.Right))
-        {
-            MoveRight(gameTime);
-        }
-
-        UpdateAnimationFrame(gameTime);
     }
 
     public override void Draw(SpriteBatch spriteBatch)
@@ -87,8 +73,6 @@ public class Player : GameObject
 
         m_bMovingLeft = true;
         m_bMoving = true;
-
-        
     }
 
     protected void MoveRight(GameTime gameTime)
@@ -101,7 +85,7 @@ public class Player : GameObject
         m_bMoving = true;
     }
 
-    private void UpdateAnimationFrame(GameTime gameTime)
+    protected void UpdateAnimationFrame(GameTime gameTime)
     {
         if (m_bMoving)
         {

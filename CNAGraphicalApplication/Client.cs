@@ -126,7 +126,7 @@ public class Client
                     /// ------------------ NEW PLAYER CONNECTED
                     case E_PacketType.SPAWN_PLAYER:
                         PlayerConnectedPacket playerConnectedPacket = packet as PlayerConnectedPacket;
-                        GameObject newPlayer = new GameObject("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
+                        Player newPlayer = new Player("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
                         newPlayer.LoadContent();
                         SceneManager.Instance.m_CurrentScene.m_GameObjects.Add(newPlayer);
                         m_ConnectedClients.Add(playerConnectedPacket.m_iID, newPlayer);
@@ -143,7 +143,7 @@ public class Client
                         ClientListPacket clientListPacket = packet as ClientListPacket;
                         foreach (Guid id in clientListPacket.m_ClientGUIDs)
                         {
-                            GameObject connectedPlayer = new GameObject("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
+                            Player connectedPlayer = new Player("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
                             connectedPlayer.LoadContent();
                             SceneManager.Instance.m_CurrentScene.m_GameObjects.Add(connectedPlayer);
                             m_ConnectedClients.Add(id, connectedPlayer);

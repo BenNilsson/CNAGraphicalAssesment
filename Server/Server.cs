@@ -130,7 +130,6 @@ namespace Server
                         case E_PacketType.CONNECT:
                             ConnectPacket connectPacket = (ConnectPacket)receivedPacket;
                             m_Clients[index].m_IPEndPoint = IPEndPoint.Parse(connectPacket.m_IPEndPoint);
-                            // ------------------ TODO : Check if anyone else has the username before setting it
 
                             // Check to see if username is already in use
                             List<string> usernames = new List<string>();
