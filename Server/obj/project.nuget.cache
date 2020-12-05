@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "q0J6X8vgdACM8KA6GxlWHmvj8xY92ayTWs9jUH1JYdtadbLSyC9tiKetDWr4pKbyhVL7yKOGLLzkmNVQSLQS4w==",
+  "success": true,
+  "projectFilePath": "D:\\NetworkedMonogame\\CNAGraphicalApplication\\Server\\Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\krota\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+  ],
+  "logs": []
+}
