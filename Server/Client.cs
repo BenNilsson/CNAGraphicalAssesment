@@ -61,7 +61,7 @@ public class Client
             m_Writer.Write(buffer);
             m_Writer.Flush();
 
-            Console.WriteLine($"[SENT] Packet {packet.Type}");
+            Console.WriteLine($"[SENT] Sent {m_sUsername} Packet {packet.Type}");
         }
     }
 
@@ -79,7 +79,6 @@ public class Client
                     MemoryStream memoryStream = new MemoryStream(buffer);
 
                     Packet packet = m_BinaryFormatter.Deserialize(memoryStream) as Packet;
-                    Console.WriteLine($"[RECEIVED] Packet {packet.Type}");
                     return packet;
                 }
             }

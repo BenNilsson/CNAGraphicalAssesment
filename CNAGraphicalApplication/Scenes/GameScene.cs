@@ -20,7 +20,7 @@ public class GameScene : Scene
         // Create an instance of the client
         m_Client = new Client();
         if (m_Client.Connect("127.0.0.1", 4444))
-            m_Client.Run();
+            m_Client.Run("Player");
         else Console.WriteLine("Could not connect to the server");
 
         base.LoadContent();

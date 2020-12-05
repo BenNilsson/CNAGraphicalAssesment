@@ -53,7 +53,7 @@ public class Client
         }
     }
 
-    public void Run()
+    public void Run(string name)
     {
         Thread tcpThread = new Thread(() =>
         {
@@ -67,7 +67,7 @@ public class Client
         });
         udpThread.Start();
 
-        UDP_Connect();
+        UDP_Connect(name);
     }
 
     public void Disconnect()
@@ -100,10 +100,10 @@ public class Client
         m_UdpClient.Send(buffer, buffer.Length);
     }
 
-    public void UDP_Connect()
+    public void UDP_Connect(string name)
     {
         IPEndPoint endPoint = (IPEndPoint)m_UdpClient.Client.LocalEndPoint;
-        ConnectPacket connectPacket = new ConnectPacket("Player", endPoint.ToString());
+        ConnectPacket connectPacket = new ConnectPacket(name, endPoint.ToString());
 
         TCP_SendPacket(connectPacket);
     }
@@ -176,11 +176,25 @@ public class Client
 
                 switch (packet.Type)
                 {
+                    /// ------------------ PLAYER MOVED
                     case E_PacketType.PLAYER_MOVED:
                         PlayerMovedPacket playerMovedPacket = packet as PlayerMovedPacket;
                         Vector2 movement = new Vector2(playerMovedPacket.m_fPosX, playerMovedPacket.m_fPosY);
                         if (m_ConnectedClients.ContainsKey(playerMovedPacket.m_GUID))
                             m_ConnectedClients[playerMovedPacket.m_GUID].Transform.m_Position = movement;
+                        break;
+                    /// ------------------ PLAYER ROTATED
+                    case E_PacketType.PLAYER_ROTATED:
+                        PlayerRotatedPacket playerRotatedPacket = packet as PlayerRotatedPacket;
+                        if (m_ConnectedClients.ContainsKey(playerRotatedPacket.m_GUID))
+                            m_ConnectedClients[playerRotatedPacket.m_GUID].Transform.m_Angle = playerRotatedPacket.m_fAngle;
+                        break;
+                    /// ------------------ PLAYER SCALED
+                    case E_PacketType.PLAYER_SCALED:
+                        PlayerScaledPacket playerScaledPacket = packet as PlayerScaledPacket;
+                        Vector2 scale = new Vector2(playerScaledPacket.m_fScaleX, playerScaledPacket.m_fScaleY);
+                        if (m_ConnectedClients.ContainsKey(playerScaledPacket.m_GUID))
+                            m_ConnectedClients[playerScaledPacket.m_GUID].Transform.m_Scale = scale;
                         break;
                     default:
                         break;

@@ -120,18 +120,37 @@ namespace Server
                 Packet receivedPacket = null;
                 bool quit = false;
 
-                Console.WriteLine("[SERVER] User Connected");
-
                 while ((receivedPacket = m_Clients[index].TCP_ReadPacket()) != null && !quit)
                 {
+                    Console.WriteLine($"[RECEIVED] {m_Clients[index].m_sUsername} received Packet {receivedPacket.Type}");
+
                     switch (receivedPacket.Type)
                     {
-
                         /// ------------------ PLAYER CONNECTED
                         case E_PacketType.CONNECT:
                             ConnectPacket connectPacket = (ConnectPacket)receivedPacket;
                             m_Clients[index].m_IPEndPoint = IPEndPoint.Parse(connectPacket.m_IPEndPoint);
-                            m_Clients[index].m_sUsername = connectPacket.m_sName;
+                            // ------------------ TODO : Check if anyone else has the username before setting it
+
+                            // Check to see if username is already in use
+                            List<string> usernames = new List<string>();
+                            foreach (Client client in m_Clients.Values)
+                            {
+                                usernames.Add(client.m_sUsername);
+                            }
+                            string newName = string.Empty;
+                            for (int i = 1; i < usernames.Count + 1; i++)
+                            {
+                                newName = "Player" + i.ToString();
+                                if (!usernames.Contains(newName))
+                                {
+                                    break;
+                                }
+                            }
+
+                            m_Clients[index].m_sUsername = newName;
+
+                            Console.WriteLine("[SERVER] " + m_Clients[index].m_sUsername + " Connected");
 
                             PlayerConnectedPacket playerConnectedPacket = new PlayerConnectedPacket(m_Clients[index].m_GUID, connectPacket.m_sName);
                             List<Guid> guids = new List<Guid>();
@@ -171,7 +190,7 @@ namespace Server
             }
             catch (EndOfStreamException e)
             {
-                Console.WriteLine("[SERVER] User disconnected : " + e.Message);
+                Console.WriteLine("[SERVER] " + m_Clients[index].m_sUsername + " disconnected : " + e.Message);
             }
             finally
             {
