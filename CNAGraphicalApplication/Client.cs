@@ -142,10 +142,11 @@ public class Client
                     /// ------------------ RECEIVED CLIENT LIST (You connected)
                     case E_PacketType.CLIENT_LIST:
                         ClientListPacket clientListPacket = packet as ClientListPacket;
-                        foreach (Guid id in clientListPacket.m_ClientGUIDs)
+                        foreach (Guid id in clientListPacket.m_ClientGUIDs.Keys)
                         {
                             Player connectedPlayer = new Player("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
                             connectedPlayer.LoadContent();
+                            connectedPlayer.m_sPlayerUsername = clientListPacket.m_ClientGUIDs[id];
                             SceneManager.Instance.m_CurrentScene.m_GameObjects.Add(connectedPlayer);
                             m_ConnectedClients.Add(id, connectedPlayer);
                         }

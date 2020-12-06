@@ -205,14 +205,14 @@ namespace Server
                             Console.WriteLine("[SERVER] " + m_Clients[index].m_sUsername + " Connected");
 
                             PlayerConnectedPacket playerConnectedPacket = new PlayerConnectedPacket(m_Clients[index].m_GUID, newName);
-                            List<Guid> guids = new List<Guid>();
+                            Dictionary<Guid, string> guids = new Dictionary<Guid, string>();
                             foreach (Client c in m_Clients.Values)
                             {
                                 if (c != m_Clients[index])
                                 {
                                     // Tell everyone else that the client has connected
                                     c.TCP_SendPacket(playerConnectedPacket);
-                                    guids.Add(c.m_GUID);
+                                    guids.Add(c.m_GUID, c.m_sUsername);
                                 }
                             }
                             // Send newly connected client a list of all current clients

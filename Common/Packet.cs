@@ -13,7 +13,6 @@ public enum E_PacketType
     PLAYER_ROTATED,
     PLAYER_SCALED,
     PLAYER_ANIMATION,
-    PLAYER_NAME_CHANGED
 }
 
 namespace Packets
@@ -61,9 +60,9 @@ namespace Packets
     [Serializable]
     public class ClientListPacket : Packet
     {
-        public List<Guid> m_ClientGUIDs;
+        public Dictionary<Guid, string> m_ClientGUIDs;
 
-        public ClientListPacket(List<Guid> clientGUIDs)
+        public ClientListPacket(Dictionary<Guid, string> clientGUIDs)
         {
             m_ClientGUIDs = clientGUIDs;
             Type = E_PacketType.CLIENT_LIST;
@@ -145,19 +144,6 @@ namespace Packets
             m_iFrame = frame;
             m_fFrameTime = frameTime;
             Type = E_PacketType.PLAYER_ANIMATION;
-        }
-    }
-
-    [Serializable]
-    public class PlayerNameChangedPacket : Packet
-    {
-        public Guid m_GUID;
-        public string m_sName;
-
-        public PlayerNameChangedPacket(string name)
-        {
-            m_sName = name;
-            Type = E_PacketType.PLAYER_NAME_CHANGED;
         }
     }
 }
