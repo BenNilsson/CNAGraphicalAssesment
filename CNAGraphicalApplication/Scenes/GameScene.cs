@@ -35,8 +35,11 @@ public class GameScene : Scene
     {
         base.Update(gameTime);
 
-        PlayerMovedPacket movedPacket = new PlayerMovedPacket(m_LocalPlayer.Transform.m_Position.X, m_LocalPlayer.Transform.m_Position.Y);
+        PlayerMovedPacket movedPacket = new PlayerMovedPacket(m_LocalPlayer.Transform.m_Position.X, m_LocalPlayer.Transform.m_Position.Y, m_LocalPlayer.m_bMovingLeft);
         m_Client.UDP_SendPacket(movedPacket);
+
+        PlayerAnimationPacket animationPacket = new PlayerAnimationPacket(m_LocalPlayer.m_iFrame, m_LocalPlayer.m_fCurFrameTime);
+        m_Client.UDP_SendPacket(animationPacket);
     }
 
     public override void Draw(SpriteBatch spriteBatch)

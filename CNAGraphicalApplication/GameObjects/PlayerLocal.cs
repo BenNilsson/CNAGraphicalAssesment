@@ -10,10 +10,10 @@ public class PlayerLocal : Player
 
     public override void Update(GameTime gameTime)
     {
+        m_bMoving = false;
 
         var keyboardState = Keyboard.GetState();
         
-        base.Update(gameTime);
 
         if (keyboardState.IsKeyDown(Keys.Left))
         {

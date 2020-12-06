@@ -11,7 +11,9 @@ public enum E_PacketType
     DISCONNECT,
     PLAYER_MOVED,
     PLAYER_ROTATED,
-    PLAYER_SCALED
+    PLAYER_SCALED,
+    PLAYER_ANIMATION,
+    PLAYER_NAME_CHANGED
 }
 
 namespace Packets
@@ -86,13 +88,15 @@ namespace Packets
         public Guid m_GUID;
         public float m_fPosX;
         public float m_fPosY;
+        public bool m_bMoveLeft;
 
-        public PlayerMovedPacket(float x, float y)
+        public PlayerMovedPacket(float x, float y, bool moveLeft)
         {
             m_GUID = Guid.Empty;
 
             m_fPosX = x;
             m_fPosY = y;
+            m_bMoveLeft = moveLeft;
             Type = E_PacketType.PLAYER_MOVED;
         }
     }
@@ -126,6 +130,34 @@ namespace Packets
             m_fScaleX = scaleX;
             m_fScaleY = scaleY;
             Type = E_PacketType.PLAYER_SCALED;
+        }
+    }
+
+    [Serializable]
+    public class PlayerAnimationPacket : Packet
+    {
+        public Guid m_GUID;
+        public int m_iFrame;
+        public float m_fFrameTime;
+
+        public PlayerAnimationPacket(int frame, float frameTime)
+        {
+            m_iFrame = frame;
+            m_fFrameTime = frameTime;
+            Type = E_PacketType.PLAYER_ANIMATION;
+        }
+    }
+
+    [Serializable]
+    public class PlayerNameChangedPacket : Packet
+    {
+        public Guid m_GUID;
+        public string m_sName;
+
+        public PlayerNameChangedPacket(string name)
+        {
+            m_sName = name;
+            Type = E_PacketType.PLAYER_NAME_CHANGED;
         }
     }
 }

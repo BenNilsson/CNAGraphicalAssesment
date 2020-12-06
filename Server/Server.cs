@@ -79,13 +79,15 @@ namespace Server
                         {
                             if (ipEndPoint.ToString() == client.m_IPEndPoint.ToString())
                             {
+                                MemoryStream stream = new MemoryStream();
+
                                 switch (packet.Type)
                                 {
+                                    /// ---------------- PLAYER MOVED
                                     case E_PacketType.PLAYER_MOVED:
                                         PlayerMovedPacket playerMovedPacket = packet as PlayerMovedPacket;
                                         playerMovedPacket.m_GUID = client.m_GUID;
 
-                                        MemoryStream stream = new MemoryStream();
                                         binaryFormatter.Serialize(stream, playerMovedPacket);
                                         byte[] playerMovedBuffer = stream.GetBuffer();
 
@@ -95,6 +97,57 @@ namespace Server
                                             {
                                                 // Send the packet received to everyone else
                                                 m_UdpListener.Send(playerMovedBuffer, playerMovedBuffer.Length, c.m_IPEndPoint);
+                                            }
+                                        }
+                                        break;
+                                    /// ---------------- PLAYER ROTATED
+                                    case E_PacketType.PLAYER_ROTATED:
+                                        PlayerRotatedPacket playerRotatedPacket = packet as PlayerRotatedPacket;
+                                        playerRotatedPacket.m_GUID = client.m_GUID;
+
+                                        binaryFormatter.Serialize(stream, playerRotatedPacket);
+                                        byte[] playerRotatedBuffer = stream.GetBuffer();
+
+                                        foreach (Client c in m_Clients.Values)
+                                        {
+                                            if (c != client && c.m_IPEndPoint != null)
+                                            {
+                                                // Send the packet received to everyone else
+                                                m_UdpListener.Send(playerRotatedBuffer, playerRotatedBuffer.Length, c.m_IPEndPoint);
+                                            }
+                                        }
+                                        break;
+                                    /// ---------------- PLAYER SCALED
+                                    case E_PacketType.PLAYER_SCALED:
+                                        PlayerScaledPacket playerScaledPacket = packet as PlayerScaledPacket;
+                                        playerScaledPacket.m_GUID = client.m_GUID;
+
+                                        binaryFormatter.Serialize(stream, playerScaledPacket);
+                                        byte[] playerScaledBuffer = stream.GetBuffer();
+
+                                        foreach (Client c in m_Clients.Values)
+                                        {
+                                            if (c != client && c.m_IPEndPoint != null)
+                                            {
+                                                // Send the packet received to everyone else
+                                                m_UdpListener.Send(playerScaledBuffer, playerScaledBuffer.Length, c.m_IPEndPoint);
+                                            }
+                                        }
+                                        break;
+                                    /// ---------------- PLAYER ANIMATION
+                                    case E_PacketType.PLAYER_ANIMATION:
+                                        PlayerAnimationPacket playerAnimationPacket = packet as PlayerAnimationPacket;
+                                        playerAnimationPacket.m_GUID = client.m_GUID;
+
+                                        binaryFormatter.Serialize(stream, playerAnimationPacket);
+                                        byte[] playerAnimationBuffer = stream.GetBuffer();
+
+                                        foreach (Client c in m_Clients.Values)
+                                        {
+                                            if (c != client && c.m_IPEndPoint != null)
+                                            {
+                                                // Send the packet received to everyone else
+                                                m_UdpListener.Send(playerAnimationBuffer, playerAnimationBuffer.Length, c.m_IPEndPoint);
                                             }
                                         }
                                         break;
@@ -151,7 +204,7 @@ namespace Server
 
                             Console.WriteLine("[SERVER] " + m_Clients[index].m_sUsername + " Connected");
 
-                            PlayerConnectedPacket playerConnectedPacket = new PlayerConnectedPacket(m_Clients[index].m_GUID, connectPacket.m_sName);
+                            PlayerConnectedPacket playerConnectedPacket = new PlayerConnectedPacket(m_Clients[index].m_GUID, newName);
                             List<Guid> guids = new List<Guid>();
                             foreach (Client c in m_Clients.Values)
                             {

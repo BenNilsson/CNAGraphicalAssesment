@@ -10,12 +10,16 @@ public class Player : GameObject
     protected int m_iSingleSpriteWidth = 64;
     protected int m_iSingleSpriteHeight = 64;
 
-    protected bool m_bMoving = false;
-    protected bool m_bMovingLeft = false;
+    public bool m_bMoving;
+    public bool m_bMovingLeft;
 
-    protected int m_iFrame = 1;
+    public int m_iFrame = 1;
+    public float m_fCurFrameTime = 0;
     protected int m_iFrameCount = 4;
-    protected float m_fCurFrameTime = 0;
+
+    public string m_sPlayerUsername;
+
+    private SpriteFont m_Ubuntu32;
 
     public Player(string imagePath, Vector2 startPos) : base(imagePath, startPos)
     {
@@ -30,34 +34,37 @@ public class Player : GameObject
         m_Texture = m_Content.Load<Texture2D>(m_ImagePath);
         m_SourceRect = new Rectangle(0, 0, m_iSingleSpriteWidth, m_iSingleSpriteHeight);
         m_Origin = new Vector2(m_iSingleSpriteWidth * 0.5f, m_iSingleSpriteHeight);
-    }
 
-    public override void UnloadContent()
-    {
-        base.UnloadContent();
-    }
-
-    public override void Update(GameTime gameTime)
-    {
-        m_bMoving = false;
+        m_Ubuntu32 = m_Content.Load<SpriteFont>("Ubuntu32");
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
+        // Draw player
         Rectangle sourceRect = new Rectangle(0, 0, m_iSingleSpriteWidth, m_iSingleSpriteHeight);
 
+        // Get position of the sprite sheet
         if (m_bMoving)
         {
-            // Get position of the sprite sheet
             int left = m_iSingleSpriteWidth * (m_iFrame - 1);
-
             sourceRect = new Rectangle(left, 0, m_iSingleSpriteWidth, m_iSingleSpriteHeight);
         }
+        else m_iFrame = 1;
 
         if (m_bMovingLeft)
             spriteBatch.Draw(m_Texture, Transform.m_Position, sourceRect, Color.White, Transform.m_Angle, m_Origin, Transform.m_Scale, SpriteEffects.FlipHorizontally, 0.0f);
         else
             spriteBatch.Draw(m_Texture, Transform.m_Position, sourceRect, Color.White, Transform.m_Angle, m_Origin, Transform.m_Scale, SpriteEffects.None, 0.0f);
+
+        // Draw username
+        if (m_sPlayerUsername != null && m_sPlayerUsername.Length > 0)
+        {
+            Vector2 textPos = Transform.m_Position;
+            Vector2 stringMeasure = m_Ubuntu32.MeasureString(m_sPlayerUsername);
+            textPos.Y -= (m_iSingleSpriteHeight + 10) * Transform.m_Scale.Y;
+            textPos.X -= stringMeasure.X * 0.5f;
+            spriteBatch.DrawString(m_Ubuntu32, m_sPlayerUsername, textPos, new Color(255, 255, 255));
+        }
     }
 
     public override void OnExiting(object sender, EventArgs args)
@@ -70,9 +77,8 @@ public class Player : GameObject
         float moveLeft = Transform.m_Position.X - m_fMovementSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         if (moveLeft > 0 + ((m_iSingleSpriteWidth * Transform.m_Scale.X) * 0.5f))
             Transform.m_Position.X = moveLeft;
-
-        m_bMovingLeft = true;
         m_bMoving = true;
+        m_bMovingLeft = true;
     }
 
     protected void MoveRight(GameTime gameTime)

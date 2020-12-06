@@ -128,6 +128,7 @@ public class Client
                         PlayerConnectedPacket playerConnectedPacket = packet as PlayerConnectedPacket;
                         Player newPlayer = new Player("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
                         newPlayer.LoadContent();
+                        newPlayer.m_sPlayerUsername = playerConnectedPacket.m_sName;
                         SceneManager.Instance.m_CurrentScene.m_GameObjects.Add(newPlayer);
                         m_ConnectedClients.Add(playerConnectedPacket.m_iID, newPlayer);
                         break;
@@ -148,6 +149,8 @@ public class Client
                             SceneManager.Instance.m_CurrentScene.m_GameObjects.Add(connectedPlayer);
                             m_ConnectedClients.Add(id, connectedPlayer);
                         }
+
+                        
                         break;
                     default:
                         break;
@@ -181,7 +184,12 @@ public class Client
                         PlayerMovedPacket playerMovedPacket = packet as PlayerMovedPacket;
                         Vector2 movement = new Vector2(playerMovedPacket.m_fPosX, playerMovedPacket.m_fPosY);
                         if (m_ConnectedClients.ContainsKey(playerMovedPacket.m_GUID))
-                            m_ConnectedClients[playerMovedPacket.m_GUID].Transform.m_Position = movement;
+                        {
+                            Player player = m_ConnectedClients[playerMovedPacket.m_GUID] as Player;
+                            player.Transform.m_Position = movement;
+                            player.m_bMoving = true;
+                            player.m_bMovingLeft = playerMovedPacket.m_bMoveLeft;
+                        }
                         break;
                     /// ------------------ PLAYER ROTATED
                     case E_PacketType.PLAYER_ROTATED:
@@ -195,6 +203,16 @@ public class Client
                         Vector2 scale = new Vector2(playerScaledPacket.m_fScaleX, playerScaledPacket.m_fScaleY);
                         if (m_ConnectedClients.ContainsKey(playerScaledPacket.m_GUID))
                             m_ConnectedClients[playerScaledPacket.m_GUID].Transform.m_Scale = scale;
+                        break;
+                    /// ------------------ PLAYER ANIMATION
+                    case E_PacketType.PLAYER_ANIMATION:
+                        PlayerAnimationPacket playerAnimationPacket = packet as PlayerAnimationPacket;
+                        if (m_ConnectedClients.ContainsKey(playerAnimationPacket.m_GUID))
+                        {
+                            Player player = m_ConnectedClients[playerAnimationPacket.m_GUID] as Player;
+                            player.m_fCurFrameTime = playerAnimationPacket.m_fFrameTime;
+                            player.m_iFrame = playerAnimationPacket.m_iFrame;
+                        }
                         break;
                     default:
                         break;

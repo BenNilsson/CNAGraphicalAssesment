@@ -4,8 +4,8 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/ball.png</File>
     <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/SlimeSpriteSheet.png</File>
+    <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/Ubuntu32.spritefont</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
