@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/ButtonImageSmall.png</SourceFile>
-  <SourceTime>2020-12-13T17:05:38.0660368+00:00</SourceTime>
+  <SourceTime>2020-12-13T18:47:07.5269656+00:00</SourceTime>
   <DestFile>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/bin/DesktopGL/Content/ButtonImageSmall.xnb</DestFile>
-  <DestTime>2020-12-13T17:07:19.3797902+00:00</DestTime>
+  <DestTime>2020-12-13T18:47:12.009396+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

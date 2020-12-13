@@ -11,6 +11,8 @@ public class SceneManager
 
     public Scene m_CurrentScene;
 
+    public Color m_BackgroundColor;
+
     public static SceneManager Instance
     {
         get
@@ -34,6 +36,7 @@ public class SceneManager
     public SceneManager()
     {
         m_CurrentScene = new ConnectScene();
+        m_BackgroundColor = Color.SkyBlue;
     }
 
     public void LoadContent(ContentManager content)

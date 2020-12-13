@@ -1,17 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Packets;
 using System;
 
 namespace CNAGraphicalApplication
 {
-    public class PlatformerGame : Game
+    public class SlimeGame : Game
     {
         private GraphicsDeviceManager m_Graphics;
         private SpriteBatch m_SpriteBatch;
 
-        public PlatformerGame()
+        public SlimeGame()
         {
             m_Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -52,7 +51,7 @@ namespace CNAGraphicalApplication
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.SkyBlue);
+            GraphicsDevice.Clear(SceneManager.Instance.m_BackgroundColor);
 
             m_SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             SceneManager.Instance.Draw(m_SpriteBatch);

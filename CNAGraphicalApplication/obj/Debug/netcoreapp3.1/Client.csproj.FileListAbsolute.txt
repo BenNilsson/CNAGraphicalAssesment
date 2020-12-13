@@ -29,3 +29,8 @@ D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\n
 D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\ButtonImageSmall.xnb
 D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\SlimeBlueSpriteSheet.xnb
 D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\SlimePinkSpriteSheet.xnb
+D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\SlimeBlueSingle.xnb
+D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\SlimeGreenSingle.xnb
+D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\SlimePinkSingle.xnb
+D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\SlimeLogo.xnb
+D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\GameBackground.xnb

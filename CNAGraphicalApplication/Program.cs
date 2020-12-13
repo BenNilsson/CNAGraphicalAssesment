@@ -7,7 +7,7 @@ namespace CNAGraphicalApplication
         [STAThread]
         static void Main()
         {
-            using (var game = new PlatformerGame())
+            using (var game = new SlimeGame())
                 game.Run();
         }
     }

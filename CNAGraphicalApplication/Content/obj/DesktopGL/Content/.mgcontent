@@ -6,12 +6,22 @@
   <SourceFiles>
     <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/ButtonImage.png</File>
     <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/ButtonImageSmall.png</File>
+    <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/GameBackground.png</File>
+    <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/SlimeBlueSingle.png</File>
     <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/SlimeBlueSpriteSheet.png</File>
+    <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/SlimeGreenSingle.png</File>
+    <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/SlimeLogo.png</File>
+    <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/SlimePinkSingle.png</File>
     <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/SlimePinkSpriteSheet.png</File>
     <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/SlimeSpriteSheet.png</File>
     <File>D:/NetworkedMonogame/CNAGraphicalApplication/CNAGraphicalApplication/Content/Ubuntu32.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

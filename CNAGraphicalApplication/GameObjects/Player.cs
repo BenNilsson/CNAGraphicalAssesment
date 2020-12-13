@@ -5,7 +5,7 @@ using System;
 
 public class Player : GameObject
 {
-    protected float m_fMovementSpeed = 200f;
+    protected float m_fMovementSpeed = 100f;
 
     protected int m_iSingleSpriteWidth = 64;
     protected int m_iSingleSpriteHeight = 64;
@@ -23,7 +23,7 @@ public class Player : GameObject
 
     public Player(string imagePath, Vector2 startPos) : base(imagePath, startPos)
     {
-        Transform.m_Scale = new Vector2(2, 2);
+        Transform.m_Scale = new Vector2(0.5f);
         m_SourceRect = new Rectangle(0, 0, m_iSingleSpriteWidth, m_iSingleSpriteHeight);
         m_Origin = new Vector2(32, 0);
     }
@@ -61,9 +61,9 @@ public class Player : GameObject
         {
             Vector2 textPos = Transform.m_Position;
             Vector2 stringMeasure = m_Ubuntu32.MeasureString(m_sPlayerUsername);
-            textPos.Y -= (m_iSingleSpriteHeight + 10) * Transform.m_Scale.Y;
-            textPos.X -= stringMeasure.X * 0.5f;
-            spriteBatch.DrawString(m_Ubuntu32, m_sPlayerUsername, textPos, new Color(255, 255, 255));
+            textPos.Y -= (m_iSingleSpriteHeight + 20) * Transform.m_Scale.Y;
+            textPos.X -= (stringMeasure.X * 0.5f) * Transform.m_Scale.X;
+            spriteBatch.DrawString(m_Ubuntu32, m_sPlayerUsername, textPos, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
         }
     }
 

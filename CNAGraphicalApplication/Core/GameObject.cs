@@ -41,7 +41,8 @@ public class GameObject
 
     public virtual void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(m_Texture, Transform.m_Position, m_SourceRect, Color.White, Transform.m_Angle, m_Origin, Transform.m_Scale, SpriteEffects.None, 0.0f);
+        if (m_Texture != null)
+            spriteBatch.Draw(m_Texture, Transform.m_Position, m_SourceRect, Color.White, Transform.m_Angle, m_Origin, Transform.m_Scale, SpriteEffects.None, 0.0f);
     }
 
     public virtual void OnExiting(object sender, EventArgs args)

@@ -21,11 +21,11 @@ public class Button : GameObject
 
     public string Text { get; set; }
 
-    public Button(string imagePath, Vector2 position, string text, SpriteFont font) : base(imagePath, position)
+    public Button(string imagePath, Vector2 position, string text, SpriteFont font, Color textColor) : base(imagePath, position)
     {
         m_SpriteFont = font;
         Text = text;
-        TextColor = Color.Black;
+        TextColor = textColor;
     }
 
     public override void Draw(SpriteBatch spriteBatch)

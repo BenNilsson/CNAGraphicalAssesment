@@ -9,6 +9,8 @@ public class GameScene : Scene
 {
     public Client m_Client;
 
+    GameObject m_Background;
+
     public GameScene(Client client)
     {
         m_Client = client;
@@ -23,8 +25,14 @@ public class GameScene : Scene
         // Create a list of gameobjects for the scene to update
         m_GameObjects = new List<GameObject>();
 
+        m_Background = new GameObject("GameBackground", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
+        m_Background.LoadContent();
+
+        // Background color
+        SceneManager.Instance.m_BackgroundColor = Color.SkyBlue;
+
         // Add Player
-        m_LocalPlayer = new PlayerLocal(m_Client.m_sCharacterLoaded, new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
+        m_LocalPlayer = new PlayerLocal(m_Client.m_sCharacterLoaded, new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y - 30));
         m_GameObjects.Add(m_LocalPlayer);
 
 
@@ -49,6 +57,7 @@ public class GameScene : Scene
 
     public override void Draw(SpriteBatch spriteBatch)
     {
+        m_Background.Draw(spriteBatch);
         base.Draw(spriteBatch);
     }
 
