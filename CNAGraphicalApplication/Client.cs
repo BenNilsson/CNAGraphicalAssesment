@@ -23,6 +23,8 @@ public class Client
 
     public Dictionary<Guid, GameObject> m_ConnectedClients;
 
+    public string m_sCharacterLoaded;
+
     public Client()
     {
         m_TcpClient = new TcpClient();
@@ -103,7 +105,7 @@ public class Client
     public void UDP_Connect(string name)
     {
         IPEndPoint endPoint = (IPEndPoint)m_UdpClient.Client.LocalEndPoint;
-        ConnectPacket connectPacket = new ConnectPacket(name, endPoint.ToString());
+        ConnectPacket connectPacket = new ConnectPacket(name, m_sCharacterLoaded, endPoint.ToString());
 
         TCP_SendPacket(connectPacket);
     }
@@ -126,7 +128,7 @@ public class Client
                     /// ------------------ NEW PLAYER CONNECTED
                     case E_PacketType.SPAWN_PLAYER:
                         PlayerConnectedPacket playerConnectedPacket = packet as PlayerConnectedPacket;
-                        Player newPlayer = new Player("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
+                        Player newPlayer = new Player(playerConnectedPacket.m_sSpriteName, new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
                         newPlayer.LoadContent();
                         newPlayer.m_sPlayerUsername = playerConnectedPacket.m_sName;
                         SceneManager.Instance.m_CurrentScene.m_GameObjects.Add(newPlayer);
@@ -144,9 +146,9 @@ public class Client
                         ClientListPacket clientListPacket = packet as ClientListPacket;
                         foreach (Guid id in clientListPacket.m_ClientGUIDs.Keys)
                         {
-                            Player connectedPlayer = new Player("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
+                            Player connectedPlayer = new Player(clientListPacket.m_ClientGUIDs[id].m_sSpriteName, new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
                             connectedPlayer.LoadContent();
-                            connectedPlayer.m_sPlayerUsername = clientListPacket.m_ClientGUIDs[id];
+                            connectedPlayer.m_sPlayerUsername = clientListPacket.m_ClientGUIDs[id].m_sName;
                             SceneManager.Instance.m_CurrentScene.m_GameObjects.Add(connectedPlayer);
                             m_ConnectedClients.Add(id, connectedPlayer);
                         }

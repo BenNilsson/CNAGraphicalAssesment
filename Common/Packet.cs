@@ -34,11 +34,13 @@ namespace Packets
     {
         public string m_IPEndPoint;
         public string m_sName;
+        public string m_sSpriteName;
 
-        public ConnectPacket(string name, string endPoint)
+        public ConnectPacket(string name, string spriteName, string endPoint)
         {
             m_IPEndPoint = endPoint;
             m_sName = name;
+            m_sSpriteName = spriteName;
             Type = E_PacketType.CONNECT;
         }
     }
@@ -48,11 +50,13 @@ namespace Packets
     {
         public Guid m_iID;
         public string m_sName;
+        public string m_sSpriteName;
 
-        public PlayerConnectedPacket(Guid id, string name)
+        public PlayerConnectedPacket(Guid id, string name, string spriteName)
         {
             m_iID = id;
             m_sName = name;
+            m_sSpriteName = spriteName;
             Type = E_PacketType.SPAWN_PLAYER;
         }
     }
@@ -60,9 +64,9 @@ namespace Packets
     [Serializable]
     public class ClientListPacket : Packet
     {
-        public Dictionary<Guid, string> m_ClientGUIDs;
+        public Dictionary<Guid, PlayerInformation> m_ClientGUIDs;
 
-        public ClientListPacket(Dictionary<Guid, string> clientGUIDs)
+        public ClientListPacket(Dictionary<Guid, PlayerInformation> clientGUIDs)
         {
             m_ClientGUIDs = clientGUIDs;
             Type = E_PacketType.CLIENT_LIST;

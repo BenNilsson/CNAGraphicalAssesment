@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Packets;
 using System;
@@ -7,21 +8,25 @@ using System.Collections.Generic;
 public class GameScene : Scene
 {
     public Client m_Client;
+
+    public GameScene(Client client)
+    {
+        m_Client = client;
+    }
+
     public PlayerLocal m_LocalPlayer;
 
     public override void LoadContent()
     {
+        m_Content = new ContentManager(SceneManager.Instance.m_Content.ServiceProvider, "Content");
+        
+        // Create a list of gameobjects for the scene to update
         m_GameObjects = new List<GameObject>();
 
         // Add Player
-        m_LocalPlayer = new PlayerLocal("SlimeSpriteSheet", new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
+        m_LocalPlayer = new PlayerLocal(m_Client.m_sCharacterLoaded, new Vector2(Constants.ScreenDimensions.X * 0.5f, Constants.ScreenDimensions.Y));
         m_GameObjects.Add(m_LocalPlayer);
 
-        // Create an instance of the client
-        m_Client = new Client();
-        if (m_Client.Connect("127.0.0.1", 4444))
-            m_Client.Run("Player");
-        else Console.WriteLine("Could not connect to the server");
 
         base.LoadContent();
     }
@@ -49,8 +54,8 @@ public class GameScene : Scene
 
     public override void OnExiting(object sender, EventArgs args)
     {
-        PlayerDisconnectedPacket disconnectPacket = new PlayerDisconnectedPacket();
-        m_Client.TCP_SendPacket(disconnectPacket);
+        PlayerDisconnectedPacket disconnectedPacket = new PlayerDisconnectedPacket();
+        m_Client.TCP_SendPacket(disconnectedPacket);
 
         m_Client.Disconnect();
 

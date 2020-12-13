@@ -17,6 +17,7 @@ public class Client
     public IPEndPoint m_IPEndPoint;
 
     public string m_sUsername;
+    public string m_sSpriteName;
     public Guid m_GUID { get; private set; }
 
     private BinaryFormatter m_BinaryFormatter;

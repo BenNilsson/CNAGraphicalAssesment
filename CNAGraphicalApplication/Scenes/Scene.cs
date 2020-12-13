@@ -14,6 +14,7 @@ public class Scene
     {
         m_Content = new ContentManager(SceneManager.Instance.m_Content.ServiceProvider, "Content");
 
+        if (m_GameObjects == null) return;
         for (int i = 0; i < m_GameObjects.Count; i++)
         {
             m_GameObjects[i].LoadContent();
@@ -22,6 +23,7 @@ public class Scene
 
     public virtual void UnloadContent()
     {
+        if (m_GameObjects == null) return;
         for (int i = 0; i < m_GameObjects.Count; i++)
         {
             m_GameObjects[i].UnloadContent();
@@ -30,6 +32,7 @@ public class Scene
 
     public virtual void Update(GameTime gameTime)
     {
+        if (m_GameObjects == null) return;
         for (int i = 0; i < m_GameObjects.Count; i++)
         {
             m_GameObjects[i].Update(gameTime);
@@ -38,6 +41,7 @@ public class Scene
 
     public virtual void Draw(SpriteBatch spriteBatch)
     {
+        if (m_GameObjects == null) return;
         for (int i = 0; i < m_GameObjects.Count; i++)
         {
             m_GameObjects[i].Draw(spriteBatch);
@@ -46,6 +50,7 @@ public class Scene
 
     public virtual void OnExiting(object sender, EventArgs args)
     {
+        if (m_GameObjects == null) return;
         for (int i = 0; i < m_GameObjects.Count; i++)
         {
             m_GameObjects[i].OnExiting(sender, args);

@@ -183,6 +183,8 @@ namespace Server
                         case E_PacketType.CONNECT:
                             ConnectPacket connectPacket = (ConnectPacket)receivedPacket;
                             m_Clients[index].m_IPEndPoint = IPEndPoint.Parse(connectPacket.m_IPEndPoint);
+                            // Set sprite
+                            m_Clients[index].m_sSpriteName = connectPacket.m_sSpriteName;
 
                             // Check to see if username is already in use
                             List<string> usernames = new List<string>();
@@ -204,15 +206,16 @@ namespace Server
 
                             Console.WriteLine("[SERVER] " + m_Clients[index].m_sUsername + " Connected");
 
-                            PlayerConnectedPacket playerConnectedPacket = new PlayerConnectedPacket(m_Clients[index].m_GUID, newName);
-                            Dictionary<Guid, string> guids = new Dictionary<Guid, string>();
+                            PlayerConnectedPacket playerConnectedPacket = new PlayerConnectedPacket(m_Clients[index].m_GUID, newName, connectPacket.m_sSpriteName);
+                            Dictionary<Guid, PlayerInformation> guids = new Dictionary<Guid, PlayerInformation>();
                             foreach (Client c in m_Clients.Values)
                             {
                                 if (c != m_Clients[index])
                                 {
                                     // Tell everyone else that the client has connected
                                     c.TCP_SendPacket(playerConnectedPacket);
-                                    guids.Add(c.m_GUID, c.m_sUsername);
+                                    PlayerInformation playerInformation = new PlayerInformation(c.m_sUsername, c.m_sSpriteName);
+                                    guids.Add(c.m_GUID, playerInformation);
                                 }
                             }
                             // Send newly connected client a list of all current clients

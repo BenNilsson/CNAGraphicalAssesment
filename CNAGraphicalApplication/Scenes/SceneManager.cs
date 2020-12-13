@@ -21,9 +21,19 @@ public class SceneManager
         }
     }
 
+    public void LoadScene(Scene scene)
+    {
+        // Unload previous scene
+        m_CurrentScene.UnloadContent();
+
+        // Load new scene
+        m_CurrentScene = scene;
+        scene.LoadContent();
+    }
+
     public SceneManager()
     {
-        m_CurrentScene = new GameScene();
+        m_CurrentScene = new ConnectScene();
     }
 
     public void LoadContent(ContentManager content)

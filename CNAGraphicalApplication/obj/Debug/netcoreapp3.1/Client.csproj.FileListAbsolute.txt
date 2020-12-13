@@ -25,3 +25,7 @@ D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\n
 D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\obj\Debug\netcoreapp3.1\Client.csprojAssemblyReference.cache
 D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\SlimeSpriteSheet.xnb
 D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\Ubuntu32.xnb
+D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\ButtonImage.xnb
+D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\ButtonImageSmall.xnb
+D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\SlimeBlueSpriteSheet.xnb
+D:\NetworkedMonogame\CNAGraphicalApplication\CNAGraphicalApplication\bin\Debug\netcoreapp3.1\Content\SlimePinkSpriteSheet.xnb
